@@ -4,6 +4,7 @@ import (
 	"backend/internal/db"
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"log"
 	"net/http"
 	"os"
@@ -14,6 +15,9 @@ import (
 
 // Handle graceful shutdown
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	db.ConnectDB()
 
 	r := gin.Default()
