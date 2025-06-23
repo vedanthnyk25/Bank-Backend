@@ -26,4 +26,15 @@ func RegisterRoutes(r *gin.Engine) {
 	account.POST("", handlers.CreateAccount)
 	account.GET("", handlers.GetAccounts)
 	account.GET("/:id", handlers.GetAccountByID)
+
+	// Transaction routes
+	transaction := r.Group("/api/transactions")
+	transaction.Use(middleware.AuthMiddleware())
+	transaction.POST("/transfer", handlers.TransferFunds)
+	transaction.POST("/withdraw", handlers.WithDrawFunds)
+	transaction.POST("/deposit", handlers.DepositFunds)
+
+	account.GET("/:id/transactions", handlers.GetTransactionHistory)
+	transaction.GET("/:id", handlers.GetTransactionByID)
+
 }

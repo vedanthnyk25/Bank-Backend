@@ -38,7 +38,7 @@ func ConnectDB() {
 
 	sqlDB.SetMaxOpenConns(25)
 
-	err = DB.AutoMigrate(&models.User{}, &models.Account{})
+	err = DB.AutoMigrate(&models.User{}, &models.Account{}, &models.Transaction{})
 	if err != nil {
 		log.Fatalf("Failed to migrate database: %v", err)
 	}
