@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/internal/db"
+	"backend/internal/jobs"
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -19,6 +20,9 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 	db.ConnectDB()
+
+	//Start the job scheduler
+	jobs.StartScheduler()
 
 	r := gin.Default()
 
